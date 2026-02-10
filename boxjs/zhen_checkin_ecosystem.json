@@ -1,0 +1,62 @@
+{
+  "id": "zhen_checkin_ecosystem",
+  "name": "珍宝自动签到生态",
+  "author": "@zhen",
+  "repo": "https://github.com/zhen/checkin-ecosystem",
+  "apps": [
+    {
+      "id": "zhen_task_creator",
+      "name": "✨ 新建签到任务",
+      "keys": [
+        "@zhen.task.name",
+        "@zhen.task.cron",
+        "@zhen.task.url",
+        "@zhen.task.method",
+        "@zhen.task.headers",
+        "@zhen.task.body",
+        "@zhen.task.template",
+        "@zhen.task.platform"
+      ],
+      "scripts": [
+        {
+          "name": "🚀 生成签到脚本",
+          "script": "./engine/generator.js"
+        }
+      ],
+      "settings": [
+        {"id":"@zhen.task.name","name":"任务名称","type":"text","desc":"填写任务名称"},
+        {"id":"@zhen.task.cron","name":"执行时间","type":"text","desc":"cron表达式"},
+        {"id":"@zhen.task.url","name":"接口URL","type":"text"},
+        {"id":"@zhen.task.method","name":"请求方式","type":"selects","items":["GET","POST"],"val":"POST"},
+        {"id":"@zhen.task.headers","name":"请求头","type":"textarea"},
+        {"id":"@zhen.task.body","name":"请求体","type":"textarea"},
+        {"id":"@zhen.task.template","name":"模板类型","type":"selects","items":["单接口签到","多步骤任务链"],"val":"单接口签到"},
+        {"id":"@zhen.task.platform","name":"运行平台","type":"selects","items":["QuantumultX","Surge","Loon","青龙"],"val":"QuantumultX"}
+      ]
+    },
+    {
+      "id": "zhen_account_center",
+      "name": "👤 账号管理中心",
+      "keys": ["@zhen.ck"],
+      "settings":[{"id":"@zhen.ck","name":"账号列表","type":"textarea","desc":"多个账号用 & 分隔"}]
+    },
+    {
+      "id": "zhen_template_center",
+      "name": "🧩 模板中心",
+      "keys": ["@zhen.template.default"],
+      "settings":[{"id":"@zhen.template.default","name":"默认模板","type":"selects","items":["基础模板","签到任务链模板"]}]
+    },
+    {
+      "id": "zhen_parser_tool",
+      "name": "🔍 抓包解析工具",
+      "keys": ["@zhen.parser.rawData"],
+      "settings":[{"id":"@zhen.parser.rawData","name":"抓包原始数据","type":"textarea"}],
+      "scripts":[{"name":"解析抓包生成模板变量","script":"./engine/parser.js"}]
+    },
+    {
+      "id": "zhen_flow_engine",
+      "name": "🔗 多步骤流程引擎",
+      "scripts":[{"name":"执行任务链","script":"./engine/flowEngine.js"}]
+    }
+  ]
+}
