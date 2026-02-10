@@ -1,48 +1,41 @@
 @echo off
 REM ------------------------------
-REM çå®ç­¾åˆ°ç”Ÿæ€ GitHub ä¸€é”®ä¸Šä¼  & BoxJS è‡ªåŠ¨æ›´æ–°è„šæœ¬
-REM é€‚ç”¨äº Windows Git Bash / CMD / PowerShell
+REM Õä±¦Ç©µ½ÉúÌ¬ GitHub Ò»¼üÉÏ´« & BoxJS ×Ô¶¯¸üĞÂ½Å±¾
+REM ÊÊÓÃÓÚ Windows Git Bash / CMD / PowerShell
 REM ------------------------------
 
-REM è¿›å…¥é¡¹ç›®ç›®å½•ï¼ˆæ”¹æˆä½ çš„é¡¹ç›®è·¯å¾„ï¼‰
+REM ½øÈëÏîÄ¿Ä¿Â¼£¨¸Ä³ÉÄãµÄÏîÄ¿Â·¾¶£©
 cd /d "C:\Users\admin\Desktop\checkin-ecosystem"
 
 echo ----------------------------------------
-echo âœ… æ£€æµ‹ Git ä»“åº“...
+echo  ¼ì²â Git ²Ö¿â...
 git rev-parse --is-inside-work-tree >nul 2>&1
 if errorlevel 1 (
-    echo ğŸ“¦ æœªæ£€æµ‹åˆ° Git ä»“åº“ï¼Œåˆå§‹åŒ–ä¸­...
+    echo  Î´¼ì²âµ½ Git ²Ö¿â£¬³õÊ¼»¯ÖĞ...
     git init
     git branch -M main
-    REM è®¾ç½®è¿œç¨‹ä»“åº“ï¼ˆä¿®æ”¹æˆä½ çš„ä»“åº“åœ°å€ï¼‰
+    REM ÉèÖÃÔ¶³Ì²Ö¿â£¨ĞŞ¸Ä³ÉÄãµÄ²Ö¿âµØÖ·£©
     git remote add origin https://github.com/wildZys/checkin-ecosystem.git
 ) else (
-    echo ğŸ“¦ å·²æ£€æµ‹åˆ° Git ä»“åº“
+    echo  ÒÑ¼ì²âµ½ Git ²Ö¿â
 )
 
 echo ----------------------------------------
-echo ğŸ“ æ·»åŠ æ‰€æœ‰ä¿®æ”¹...
+echo  Ìí¼ÓËùÓĞĞŞ¸Ä...
 git add .
 
 echo ----------------------------------------
-REM ç”Ÿæˆ commit ä¿¡æ¯ï¼ˆå¯è‡ªåŠ¨åŠ ç‰ˆæœ¬å·ï¼‰
+REM Éú³É commit ĞÅÏ¢£¨¿É×Ô¶¯¼Ó°æ±¾ºÅ£©
 for /f "tokens=1-4 delims=/- " %%a in ('date /t') do set TODAY=%%c-%%a-%%b
-set COMMIT_MSG=æ›´æ–°ç­¾åˆ°ç”Ÿæ€ %TODAY%
-echo ğŸ’¾ æœ¬æ¬¡æäº¤ä¿¡æ¯: %COMMIT_MSG%
+set COMMIT_MSG=¸üĞÂÇ©µ½ÉúÌ¬ %TODAY%
+echo  ±¾´ÎÌá½»ĞÅÏ¢: %COMMIT_MSG%
 git commit -m "%COMMIT_MSG%"
 
-echo ----------------------------------------
-REM æ›´æ–° BoxJS è®¢é˜…ç‰ˆæœ¬å·ï¼ˆå‡è®¾åœ¨ boxjs/version.json ä¸­ï¼‰
-if exist boxjs\version.json (
-    for /f "tokens=2 delims=:," %%i in ('findstr "version" boxjs\version.json') do set /a VERSION=%%i+1
-    powershell -Command "(Get-Content boxjs\version.json) -replace '\"version\":\s*\d+', '\"version\": %VERSION%' | Set-Content boxjs\version.json"
-    echo ğŸ”¢ BoxJS è®¢é˜…ç‰ˆæœ¬å·å·²æ›´æ–°ä¸º %VERSION%
-)
 
 echo ----------------------------------------
-echo ğŸš€ æ¨é€åˆ° GitHub...
+echo  ÍÆËÍµ½ GitHub...
 git push -u origin main
 
 echo ----------------------------------------
-echo âœ… ä¸Šä¼  & BoxJS è‡ªåŠ¨æ›´æ–°å®Œæˆï¼
+echo  ÉÏ´« & BoxJS ×Ô¶¯¸üĞÂÍê³É£¡
 pause
