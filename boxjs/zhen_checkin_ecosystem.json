@@ -2,7 +2,7 @@
   "id": "zhen_checkin_ecosystem",
   "name": "珍宝自动签到生态",
   "author": "@zhen",
-  "repo": "https://github.com/zhen/checkin-ecosystem",
+  "repo": "https://github.com/wildZys/checkin-ecosystem",
   "apps": [
     {
       "id": "zhen_task_creator",
